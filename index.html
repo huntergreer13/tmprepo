@@ -12,8 +12,11 @@
   <script>
 
     $( document ).ready(function() {
-      var x = getHistoricalWaitTimes();
-      console.log(x);
+
+      getHistoricalWaitTimes().then(function (data) {
+        console.log(JSON.stringify(data));
+      });
+
     });
 
     function getHistoricalWaitTimes() {
@@ -23,6 +26,24 @@
         async: true
        });
     }
+
+    function getHistoricalWaitTimes() {
+      return $.ajax({
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
+        dataType: 'json',
+        async: true
+       });
+    }
+
+    function getHistoricalWaitTimes() {
+      return $.ajax({
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
+        dataType: 'json',
+        async: true
+       });
+    }
+
+
 
   </script>
 </body>
