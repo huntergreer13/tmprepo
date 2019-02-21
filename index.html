@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<body>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+  <script src="jquery/dist/jquery.min.js"></script>
+
+
+
+  <script>
+
+    $( document ).ready(function() {
+      //var x = getHistoricalWaitTimes();
+      console.log(x);
+    });
+
+    function getHistoricalWaitTimes() {
+      return $.ajax({
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
+        dataType: 'json',
+        async: true
+       });
+    }
+
+  </script>
+</body>
+</html>
