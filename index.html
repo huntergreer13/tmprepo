@@ -5,21 +5,40 @@
 <body>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
-  <!--script src="jquery/dist/jquery.min.js"></script-->
-
-
-
   <script>
-
     $( document ).ready(function() {
 
-      getHistoricalWaitTimes().then(function (data) {
+      getCurrentItems().then(function (data) {
+        console.log("Getting current items...");
+        console.log(JSON.stringify(data));
+      });
+
+      var upc = "123123123123";
+      var scannedDateTime = "";
+      var newExpDate = "2019-4-1";
+      updateExpirationDate(upc, scannedDateTime, newExpDate).then(function (data) {
+        console.log("Updating expiration date...");
+        console.log(JSON.stringify(data));
+      });
+
+
+      var startDate = "2019-2-10";
+      var endDate = "2019-2-20";
+      getHistoricalData(upc, scannedDateTime, newExpDate).then(function (data) {
+        console.log("Getting historical data...");
+        console.log(JSON.stringify(data));
+      });
+
+      var upc = "123123123123";
+      var scannedDateTime = "2019-2-16 13:54:56";
+      moveToHistory(upc, scannedDateTime).then(function (data) {
+        console.log("Moving data to history table...");
         console.log(JSON.stringify(data));
       });
 
     });
 
-    function getHistoricalWaitTimes() {
+    function getCurrentItems() {
       return $.ajax({
         url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
         dataType: 'json',
@@ -27,23 +46,29 @@
        });
     }
 
-    function getHistoricalWaitTimes() {
+    function updateExpirationDate(upc, scannedDateTime, newExpDate) {
       return $.ajax({
-        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/update-item?upc=' + upc + '&scannedDateTime=' + scannedDateTime + '&newExpDate=' + newExpDate,
         dataType: 'json',
         async: true
        });
     }
 
-    function getHistoricalWaitTimes() {
+    function getHistoricalData(startDate, endDate) {
       return $.ajax({
-        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-current-items',
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/get-historical-data?startDate=' + startDate + '&endDate=' + endDate,
         dataType: 'json',
         async: true
        });
     }
 
-
+    function moveToHistory(upc, scannedDateTime) {
+      return $.ajax({
+        url: 'https://aromn32tn6.execute-api.us-east-1.amazonaws.com/dev/move-to-historical?upc=' + upc + '&scannedDateTime=' + scannedDateTime,
+        dataType: 'json',
+        async: true
+       });
+    }
 
   </script>
 </body>
